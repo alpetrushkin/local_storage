@@ -1,22 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
    const [value, setValue] = useState(0)
 
-   const onClickIncHandler = () => {
-      setValue(value + 1)
-   }
+   useEffect(() => {
+      let valueAsString = localStorage.getItem('counterValue')
+      if (valueAsString) {
+         let newValue = JSON.parse(valueAsString)
+         setValue(newValue)
+         console.log(newValue + 'newValue')
+      }
+   }, [])
 
-   const setToLocalStorage = () => {
-      sessionStorage.setItem('counterValue', JSON.stringify(value))
+   const onClickIncHandler = () => {
+      const newValue = value + 1
+      setValue(newValue)
+      localStorage.setItem('counterValue', JSON.stringify(newValue))
+      console.log(newValue + 'value')
    }
 
    return (
       <div className="App">
          <h3>{value}</h3>
          <button onClick={onClickIncHandler}>INC</button>
-         <button onClick={setToLocalStorage}>setToLocalStorage</button>
       </div>
    );
 }
