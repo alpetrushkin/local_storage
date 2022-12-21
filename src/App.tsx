@@ -25,6 +25,7 @@ function App() {
       localStorage.clear()
       setValue(0)
    }
+
    
    const removeFromItemLocalStorageHandler = () => {
      localStorage.removeItem('counterValue + 1')
